@@ -1,19 +1,10 @@
 {
   "name": "com.question.gameplay_tags",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "GameplayTags",
   "unity": "6000.0",
   "description": "Provides enhanced Tag system.",
-  "dependencies": { "com.question.code_generator": "1.0.2" },
-  "scopedRegistries": [
-    {
-      "name": "QuestionPackages",
-      "url": "https://registry.npmjs.org/",
-      "scopes": [
-        "com.question"
-      ]
-    }
-  ],
+  "dependencies": { "com.question.code_generator": "1.0.3" },
   "author": "Namgyeong Heo",
   "keywords": [ "Tag", "GameplayTag", "GameplayTags" ],
   "license": "MIT"
