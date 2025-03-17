@@ -13,13 +13,15 @@ using UnityEditor;
 
 namespace GameplayTags
 {
-    public class GameplayTagsList : ScriptableObject
+    public class GameplayTagsList : ScriptableObject, ISerializationCallbackReceiver
     {
         internal const string gameplayTagsListPath = "Assets/Resources/GameplayTags/List.asset";
         internal const string resourcesTagsListPath = "GameplayTags/List";
 
         [SerializeField]
         private List<GameplayTag> tags = new List<GameplayTag>();
+
+        private Dictionary<string, GameplayTag> tagMap = new Dictionary<string, GameplayTag>();
 
         public ReadOnlyCollection<GameplayTag> Tags
         {
@@ -64,7 +66,8 @@ namespace GameplayTags
 
         public GameplayTag FindGameplayTag(string name)
         {
-            return tags.Find((GameplayTag tag) => tag.Name == name);
+            tagMap.TryGetValue(name, out GameplayTag tag);
+            return tag;
         }
 
 #if UNITY_EDITOR
@@ -107,6 +110,26 @@ namespace GameplayTags
             tags.Remove(tag);
         }
 #endif
+
+        public void OnBeforeSerialize()
+        {
+            tags.Clear();
+
+            foreach (GameplayTag tag in tagMap.Values)
+            {
+                tags.Add(tag);
+            }
+        }
+
+        public void OnAfterDeserialize()
+        {
+            tagMap = new Dictionary<string, GameplayTag>();
+
+            foreach (GameplayTag tag in tags)
+            {
+                tagMap.Add(tag.Name, tag);
+            }
+        }
     }
 
 #if UNITY_EDITOR

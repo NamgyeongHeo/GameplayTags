@@ -1,6 +1,6 @@
 {
   "name": "com.question.gameplay_tags",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "displayName": "GameplayTags",
   "unity": "6000.0",
   "description": "Provides enhanced Tag system.",
