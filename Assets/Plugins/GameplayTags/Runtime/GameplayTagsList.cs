@@ -129,7 +129,7 @@ namespace GameplayTags
             }
             codeBuilder.AppendLine("}");
 
-            string scriptLocation = $"{ICodeGenerator.DefaultFolderPath}/{nameof(GameplayTagsList)}.generated.cs";
+            string scriptLocation = $"{nameof(GameplayTagsList)}/{nameof(GameplayTagsList)}.generated.cs";
             CodeGenerationContext context = new CodeGenerationContext(scriptLocation, codeBuilder.ToString());
             return new CodeGenerationContext[] { context };
         }
