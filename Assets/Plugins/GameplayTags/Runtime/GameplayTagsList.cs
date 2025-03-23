@@ -113,12 +113,17 @@ namespace GameplayTags
 
         public void OnBeforeSerialize()
         {
-            tags.Clear();
-
+            /*
             foreach (GameplayTag tag in tagMap.Values)
             {
+                if (tags.Contains(tag))
+                {
+                    continue;
+                }
+
                 tags.Add(tag);
             }
+            */
         }
 
         public void OnAfterDeserialize()
