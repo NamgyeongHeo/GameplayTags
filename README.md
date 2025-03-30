@@ -3,10 +3,10 @@
 - [Intro](#Intro) 
 - [Install](#Install)
 - [How to use](#How-to-use)
--- [Define tags](#Define-tags)
--- [Store a tag](#Store-a-tag)
--- [Store a multiple tag](#Store-a-multiple-tag)
--- [Query with GameplayTags](#Query-with-GameplayTags)
+  - [Define tags](#Define-tags)
+  - [Store a tag](#Store-a-tag)
+  - [Store a multiple tag](#Store-a-multiple-tag)
+  - [Query with GameplayTags](#Query-with-GameplayTags)
 
 ## Intro 
 `GameplayTags` provides structures that manage tags consisting of strings.
