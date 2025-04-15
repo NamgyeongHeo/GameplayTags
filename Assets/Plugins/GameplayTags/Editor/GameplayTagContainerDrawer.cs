@@ -1,12 +1,15 @@
 ﻿using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace GameplayTags.Editor
 {
     [CustomPropertyDrawer(typeof(GameplayTagContainer))]
     public class GameplayTagContainerDrawer : PropertyDrawer
     {
+        private bool foldout;
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             base.OnGUI(position, property, label);
@@ -19,27 +22,32 @@ namespace GameplayTags.Editor
                 reference.tags.Remove(tag);
             }
 
-            for (int i = 0; i < tagsList.TagsRef.Count; i++)
+            foldout = EditorGUILayout.BeginFoldoutHeaderGroup(foldout, "Tag List");
+            if (foldout)
             {
-                GameplayTag tag = tagsList.TagsRef[i];
-
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField(tag.Name);
-                bool contains = reference.HasTag(tag);
-                if (EditorGUILayout.Toggle(contains))
+                for (int i = 0; i < tagsList.TagsRef.Count; i++)
                 {
-                    if (!contains)
+                    GameplayTag tag = tagsList.TagsRef[i];
+
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField(tag.Name);
+                    bool contains = reference.HasTag(tag);
+                    if (EditorGUILayout.Toggle(contains))
                     {
-                        reference.AddTag(tag);
+                        if (!contains)
+                        {
+                            reference.AddTag(tag);
+                        }
                     }
-                }
-                else if (contains)
-                {
-                    reference.RemoveTag(tag);
-                }
+                    else if (contains)
+                    {
+                        reference.RemoveTag(tag);
+                    }
 
-                EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.EndHorizontal();
+                }
             }
+            EditorGUILayout.EndFoldoutHeaderGroup();
 
             property.boxedValue = reference;
         }
